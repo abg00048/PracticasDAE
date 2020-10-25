@@ -1,2 +1,6 @@
 com\proyectodae\proyectodae\PaqueteriaApp.class
+com\proyectodae\proyectodae\Cliente.class
+com\proyectodae\util\Codificador.class
 com\proyectodae\util\JsonRead.class
+com\proyectodae\proyectodae\Destinatario.class
+com\proyectodae\proyectodae\Remitente.class
