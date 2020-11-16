@@ -5,3 +5,5 @@ com\proyectodae\entidades\CentroLogistico.class
 com\proyectodae\entidades\RegistroEnvio.class
 com\proyectodae\util\JsonRead.class
 com\proyectodae\entidades\PuntoControl.class
+com\proyectodae\proyectodae\Destinatario.class
+com\proyectodae\proyectodae\Remitente.class
