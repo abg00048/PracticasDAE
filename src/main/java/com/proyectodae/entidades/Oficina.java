@@ -19,6 +19,7 @@ public class Oficina extends PuntoControl{
     private String localidad;
     
     public Oficina(String localidad) {
+        super();        
         this.localidad = localidad;
     }
     
@@ -47,7 +48,7 @@ public class Oficina extends PuntoControl{
      * @param destino Punto de control final
      * @return 
      */
-    public ArrayList<PuntoControl> calcularRuta(String origen, String destino){
+    public void calcularRuta(String origen, String destino){
         
     }
 }

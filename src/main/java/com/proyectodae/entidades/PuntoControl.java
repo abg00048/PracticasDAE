@@ -5,6 +5,7 @@
  */
 package com.proyectodae.entidades;
 
+import com.proyectodae.util.RandomString;
 /**
  *
  * @author raulb
@@ -15,8 +16,9 @@ public class PuntoControl {
      */
     private String id;
     
-    public PuntoControl(String id){
-        this.id = id;
+    public PuntoControl(){
+        RandomString rd = new RandomString();
+        this.id = rd.generateUniqueId();
     }
 
     public String getId() {

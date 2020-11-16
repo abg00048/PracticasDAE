@@ -31,6 +31,7 @@ public class CentroLogistico extends PuntoControl{
     private ArrayList<CentroLogistico> centros;
     
     public CentroLogistico(String provincia, String region){
+        super();
         this.provincia = provincia;
         this.region = region;
         this.oficinas = new ArrayList<>();
