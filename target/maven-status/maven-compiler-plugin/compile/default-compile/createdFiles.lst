@@ -1,6 +1,9 @@
+com\proyectodae\entidades\Oficina.class
 com\proyectodae\proyectodae\PaqueteriaApp.class
-com\proyectodae\proyectodae\Cliente.class
-com\proyectodae\util\Codificador.class
+com\proyectodae\util\RandomString.class
+com\proyectodae\entidades\CentroLogistico.class
+com\proyectodae\entidades\RegistroEnvio.class
 com\proyectodae\util\JsonRead.class
+com\proyectodae\entidades\PuntoControl.class
 com\proyectodae\proyectodae\Destinatario.class
 com\proyectodae\proyectodae\Remitente.class
