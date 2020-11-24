@@ -6,27 +6,17 @@
 package com.proyectodae.entidades;
 
 import com.proyectodae.util.RandomString;
+import java.util.List;
 /**
  *
  * @author raulb
  */
-public class PuntoControl {
-    /**
-     * Número de identificación del punto de control
-     */
-    private String id;
-    
-    public PuntoControl(){
-        RandomString rd = new RandomString();
-        this.id = rd.generateUniqueId();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }    
-    
+public abstract class PuntoControl {
+   public void actualizarLocalizacion(){
+       
+   }
+   
+   public void realizarEnvio(){
+       
+   }
 }

@@ -5,7 +5,7 @@
  */
 package com.proyectodae.entidades;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,62 +13,36 @@ import java.util.ArrayList;
  */
 public class CentroLogistico extends PuntoControl{
     
-    /**
-     * Provincia donde se encuentra el centro logístico
-     */
-    private String provincia;
-    /**
-     * Region donde se encuentra el centro logístico
-     */
-    private String region;
-    /**
-     * Oficinas conectadas con el centro logístico
-     */
-    private ArrayList<Oficina> oficinas;
-    /**
-     * Centros logísticos conectados con el centro logístico
-     */
-    private ArrayList<CentroLogistico> centros;
+    /** Identificador del centro logistico */
+    private String id;
+    /** Localizacion del centro logistico */
+    private String localizacion;
+    /** Nombre del centro logistico */
+    private String nombre;
+    /** Lista de las provincias con oficinas asociadas a este centro logistico */
+    private List<Oficina> provincias;
+    /** Lista de centros logisticos asociados a este centro logistico */
+    private List<CentroLogistico> conexiones;
     
-    public CentroLogistico(String provincia, String region){
-        super();
-        this.provincia = provincia;
-        this.region = region;
-        this.oficinas = new ArrayList<>();
-        this.centros = new ArrayList<>();
-    }
-
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public ArrayList<Oficina> getOficinas() {
-        return oficinas;
-    }
-
-    public void setOficinas(ArrayList<Oficina> oficinas) {
-        this.oficinas = oficinas;
-    }
-
-    public ArrayList<CentroLogistico> getCentros() {
-        return centros;
-    }
-
-    public void setCentros(ArrayList<CentroLogistico> centros) {
-        this.centros = centros;
+    public CentroLogistico(){
     }
     
+    public CentroLogistico(String id, String localizacion, String nombre, List<Oficina> provincias, List<CentroLogistico> conexiones){
+        this.id = id;
+        this.localizacion = localizacion;
+        this.nombre = nombre;
+        this.provincias = provincias;
+        this.conexiones = conexiones;
+    }
+    
+    @Override
+    public void actualizarLocalizacion(){
+        
+    }
+    
+    @Override
+    public void realizarEnvio(){
+        
+    }
     
 }
