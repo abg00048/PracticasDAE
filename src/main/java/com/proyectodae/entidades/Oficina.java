@@ -9,6 +9,7 @@ import com.proyectodae.servicio.Paqueteria;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -17,10 +18,13 @@ import java.util.List;
 public class Oficina extends PuntoControl{
     
     /** Id del centro logistico al que pertenece la oficina */
+    @NotBlank
     private String id;
     /** Provincia donde se encuentra la oficina*/
+    @NotBlank
     private String provincia;
     /** Lista de envios que tiene que hacer la oficina */
+    @NotBlank
     private List<Envio> envios;
     /** Centro logistico asociado a la oficina */
     //CentroLogistico centro;
@@ -77,8 +81,7 @@ public class Oficina extends PuntoControl{
     /** Crea un envio con los datos del paquete
      * @param remitente cliente que envia el paquete
      * @param destinatario cliente que recibe el paquete*/
-    public void crearEnvio(Cliente remitente, Cliente destinatario){
-        Paqueteria paqueteria = new Paqueteria();
+    public void crearEnvio(Cliente remitente, Cliente destinatario, String origen, String destino){
         /** Localizador del envio */
         String localizador = Integer.toString((int)(Math.random()*1000000000));
         /** Importe total del envio */
@@ -88,13 +91,13 @@ public class Oficina extends PuntoControl{
         /** Fecha de entrega del paquete */
         LocalDate fecha = LocalDate.now().plusDays((int)(Math.random()*6));
         /** Localizacion actual del paquete */
-        String localizacion = this.provincia;
+        String localizacion = origen;
         /** Ruta que tiene que hacer el envio */
-        String[] ruta = null;
+        List<String> ruta = new ArrayList();
         /** Paquete asociado al envio */
         Paquete paquete = new Paquete(localizador, Double.toString(medirPaquete()), Double.toString(pesarPaquete()));
         /** Creamos el envio */
-        Envio envio = new Envio(localizador, importe, estado, fecha, remitente, destinatario, paquete, localizacion, ruta);
+        Envio envio = new Envio(localizador, importe, estado, fecha, remitente, destinatario, origen, destino,paquete, localizacion, ruta);
         
         /** Añadimos el nuevo envio a la lista de envios de la oficina*/
         envios.add(envio);
@@ -102,16 +105,40 @@ public class Oficina extends PuntoControl{
     }
     
     /** Crea una ruta para hacer un envio */
-    public void crearRuta(){
-        
+    public List<String> crearRuta(Paqueteria servicio, Envio envio){
+        List<String> ruta = new ArrayList();
+        /** Se añade la provincia a la ruta si el lugar de origen y el lugar de destino son el mismo */
+        if (envio.destino == envio.origen){
+            ruta.add(envio.destino);
+        }
+        else{
+            /** Id del centro logistico de la provincia desde la que se envia el paquete */
+            String idCentroOrigen = "";
+            /** Id del centro logistico asociado a la provincia de destino del paquete */
+            String idCentroDestino = "";
+            for (int i = 0; i < servicio.getCentrosLogisticos().size(); i++){
+                /** Compara si la provincia del centro logistico y la provincia de la que sale el paquete son la misma */
+                if (servicio.getCentrosLogisticos().get(i).getLocalizacion() == envio.origen){
+                    idCentroOrigen = servicio.getCentrosLogisticos().get(i).getId();
+                }
+                for (int j = 0; j < servicio.getCentrosLogisticos().get(i).getProvincias().size(); j++){
+                    /** Compara si alguna provincia del centro logistico "i" es igual a la provincia destino del paquete */
+                    if (servicio.getCentrosLogisticos().get(i).getProvincias().get(j).getProvincia() == envio.destino){
+                        idCentroDestino = servicio.getCentrosLogisticos().get(i).getId();
+                    }
+                }
+            }
+            /** Compara si el envio se hace entre las provincias asociadas a un mismo centro logistico */
+            if (idCentroOrigen == idCentroDestino){
+                ruta.add(envio.origen);
+                ruta.add(envio.destino);
+            }
+            else{
+                // Por hacer
+            }
+        }
+        return ruta;
     }
     
-    @Override
-    public void actualizarLocalizacion(){
-    }
     
-    @Override
-    public void realizarEnvio(){
-        
-    }
 }

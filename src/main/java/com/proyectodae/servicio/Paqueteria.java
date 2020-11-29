@@ -5,8 +5,8 @@
  */
 package com.proyectodae.servicio;
 
+import com.proyectodae.entidades.CentroLogistico;
 import com.proyectodae.entidades.Cliente;
-import com.proyectodae.entidades.PuntoControl;
 import com.proyectodae.excepciones.ClienteYaRegistrado;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +29,19 @@ public class Paqueteria {
     /** Mapa con la lista de clientes ordenada por DNI */
     Map<String, Cliente> clientes;
     /** Lista de los puntos de control */
-    List<PuntoControl> puntosControl;
+    List<CentroLogistico> centrosLogisticos;
     
     public Paqueteria() {
         clientes = new TreeMap<>();
-        puntosControl = new ArrayList();
+        centrosLogisticos = new ArrayList();
+    }
+
+    public List<CentroLogistico> getCentrosLogisticos() {
+        return centrosLogisticos;
     }
     
-    public void setPuntosControl(List<PuntoControl> puntosControl) {
-        this.puntosControl = puntosControl;
+    public void setCentroLogistico(List<CentroLogistico> centrosLogisticos) {
+        this.centrosLogisticos = centrosLogisticos;
     }
 
     public Map<String, Cliente> getClientes() {
@@ -75,13 +79,41 @@ public class Paqueteria {
      * @param localizador identificador asociado al envio
      * @return  devuelve la localizacion en la que se encuentra el envio*/
     public String localizarPaquete(String localizador){
-        return "0";
+        String localizacion = "";
+        /** Busca en todos los centros logisticos */
+        for (int i = 0; i < centrosLogisticos.size(); i++){
+            /** Busca todas las provincias asociadas al centro logistico "i" */
+            for (int j = 0; j < centrosLogisticos.get(i).getProvincias().size(); j++){
+                /** Busca todos los envios asociados a la oficina de la provincia "j" */
+                for (int k = 0; k < centrosLogisticos.get(i).getProvincias().get(j).getEnvios().size(); k++){
+                    /** Devuelve la localizacion del paquete asociado al envio "k" */
+                    if (centrosLogisticos.get(i).getProvincias().get(j).getEnvios().get(k).getLocalizador() == localizador){
+                        localizacion = centrosLogisticos.get(i).getProvincias().get(j).getEnvios().get(k).getSituacion();
+                    }
+                }
+            }
+        }
+        return localizacion;
     }
     
     /** Busco el envio asociado a ese localizador y devuelve el estado actual del envio
      * @param localizador identificador asociado al envio
      * @return  devuelve el estado del envio (En gestion, Enviado, En reparto)*/
     public String estadoEnvio(String localizador){
-        return "0";
+        String estado = "";
+        /** Busca en todos los centros logisticos */
+        for (int i = 0; i < centrosLogisticos.size(); i++){
+            /** Busca todas las provincias asociadas al centro logistico "i" */
+            for (int j = 0; j < centrosLogisticos.get(i).getProvincias().size(); j++){
+                /** Busca todos los envios asociados a la oficina de la provincia "j" */
+                for (int k = 0; k < centrosLogisticos.get(i).getProvincias().get(j).getEnvios().size(); k++){
+                    /** Devuelve el estado del envio "k" */
+                    if (centrosLogisticos.get(i).getProvincias().get(j).getEnvios().get(k).getLocalizador() == localizador){
+                        estado = centrosLogisticos.get(i).getProvincias().get(j).getEnvios().get(k).getEstado();
+                    }
+                }
+            }
+        }
+        return estado;
     }
 }

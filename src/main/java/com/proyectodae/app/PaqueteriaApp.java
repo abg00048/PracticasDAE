@@ -7,7 +7,7 @@ package com.proyectodae.app;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.proyectodae.entidades.PuntoControl;
+import com.proyectodae.entidades.CentroLogistico;
 import com.proyectodae.servicio.Paqueteria;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -22,7 +22,7 @@ import org.springframework.context.ApplicationContext;
  *
  * @author alvar
  */
-@SpringBootApplication()
+@SpringBootApplication
 public class PaqueteriaApp {
     public static void main(String[] args) throws Exception, java.io.IOException {
         // Creación de servidor
@@ -38,11 +38,11 @@ public class PaqueteriaApp {
             Reader reader = Files.newBufferedReader(Paths.get("redujapack.json"));
 
             // convert JSON array to list
-            List<PuntoControl> puntosControl = new Gson().fromJson(reader, new TypeToken<List<PuntoControl>>() {}.getType());
+            List<CentroLogistico> centrosLogisticos = new Gson().fromJson(reader, new TypeToken<List<CentroLogistico>>() {}.getType());
             
             // establece los puntos de control del servicio de paqueteria
             Paqueteria servicio = new Paqueteria();
-            servicio.setPuntosControl(puntosControl);
+            servicio.setCentroLogistico(centrosLogisticos);
 
             // close reader
             reader.close();

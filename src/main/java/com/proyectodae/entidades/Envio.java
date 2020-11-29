@@ -7,6 +7,7 @@ package com.proyectodae.entidades;
 
 
 import java.time.LocalDate;
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.NotNull;
@@ -34,15 +35,21 @@ public class Envio {
     private Cliente remitente;
     /** Cliente destinatario */
     private Cliente destinatario;
+    /** Direccion de origen del envio */
+    @NotBlank
+    String origen;
+    /** Direccion de destino del envio */
+    @NotBlank
+    String destino;
     /** Paquete asociado al envio */
     Paquete paquete;
     /** Situacion del paquete */
     String situacion;
     /** Ruta que tiene que seguir el envio */
-    String[] ruta;
+    List<String> ruta;
 
 
-    public Envio(String localizador, Double importe, String estado, LocalDate fechaentrega, Cliente remitente, Cliente destinatario, Paquete paquete, String situacion, String[] ruta) {
+    public Envio(String localizador, Double importe, String estado, LocalDate fechaentrega, Cliente remitente, Cliente destinatario, String origen, String destino, Paquete paquete, String situacion, List<String> ruta) {
         
         this.localizador = localizador;
         this.importe = importe;
@@ -50,6 +57,8 @@ public class Envio {
         this.fechaentrega = fechaentrega;
         this.remitente = remitente;
         this.destinatario = destinatario;
+        this.origen = origen;
+        this.destino = destino;
         this.paquete = paquete;
         this.situacion = situacion;
         this.ruta = ruta;
@@ -120,12 +129,30 @@ public class Envio {
         this.situacion = situacion;
     }
 
-    public String[] getRuta() {
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public List<String> getRuta() {
         return ruta;
     }
 
-    public void setRuta(String[] ruta) {
+    public void setRuta(List<String> ruta) {
         this.ruta = ruta;
     }
+
+    
     
 }

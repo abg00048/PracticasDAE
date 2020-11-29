@@ -6,6 +6,7 @@
 package com.proyectodae.entidades;
 
 import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -14,35 +15,80 @@ import java.util.List;
 public class CentroLogistico extends PuntoControl{
     
     /** Identificador del centro logistico */
+    @NotBlank
     private String id;
-    /** Localizacion del centro logistico */
-    private String localizacion;
     /** Nombre del centro logistico */
+    @NotBlank
     private String nombre;
+    /** Localizacion del centro logistico */
+    @NotBlank
+    private String localizacion;
     /** Lista de las provincias con oficinas asociadas a este centro logistico */
+    @NotBlank
     private List<Oficina> provincias;
     /** Lista de centros logisticos asociados a este centro logistico */
+    @NotBlank
     private List<CentroLogistico> conexiones;
+    
+    private List<Envio> envios;
     
     public CentroLogistico(){
     }
     
-    public CentroLogistico(String id, String localizacion, String nombre, List<Oficina> provincias, List<CentroLogistico> conexiones){
+    public CentroLogistico(String id, String nombre, String localizacion, List<Oficina> provincias, List<CentroLogistico> conexiones){
         this.id = id;
-        this.localizacion = localizacion;
         this.nombre = nombre;
+        this.localizacion = localizacion;
         this.provincias = provincias;
         this.conexiones = conexiones;
     }
-    
-    @Override
-    public void actualizarLocalizacion(){
-        
+
+    public String getId() {
+        return id;
     }
-    
-    @Override
-    public void realizarEnvio(){
-        
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Oficina> getProvincias() {
+        return provincias;
+    }
+
+    public void setProvincias(List<Oficina> provincias) {
+        this.provincias = provincias;
+    }
+
+    public List<CentroLogistico> getConexiones() {
+        return conexiones;
+    }
+
+    public void setConexiones(List<CentroLogistico> conexiones) {
+        this.conexiones = conexiones;
+    }
+
+    public List<Envio> getEnvios() {
+        return envios;
+    }
+
+    public void setEnvios(List<Envio> envios) {
+        this.envios = envios;
     }
     
 }
