@@ -29,6 +29,7 @@ public abstract class PuntoControl {
         /** Si la ruta solo tiene un elemento significa que el envio se encuentra en la localidad de destino y se puede proceder a su reparto */
         if (envio.getRuta().size() == 1){
             envio.setEstado("En reparto");
+            envios.remove(0);
         }
         /** Si la ruta tiene mas de un elemento significa que hay que llevar el paquete a otro punto de control*/
         else{
