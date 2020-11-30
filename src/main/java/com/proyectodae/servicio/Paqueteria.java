@@ -8,6 +8,7 @@ package com.proyectodae.servicio;
 import com.proyectodae.entidades.CentroLogistico;
 import com.proyectodae.entidades.Cliente;
 import com.proyectodae.excepciones.ClienteYaRegistrado;
+import com.proyectodae.repositorios.RepositorioClientes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,9 @@ import java.util.TreeMap;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 /**
@@ -30,6 +33,9 @@ public class Paqueteria {
     Map<String, Cliente> clientes;
     /** Lista de los puntos de control */
     List<CentroLogistico> centrosLogisticos;
+    
+    @Autowired
+    RepositorioClientes repositorioClientes;
     
     public Paqueteria() {
         clientes = new TreeMap<>();
@@ -61,8 +67,10 @@ public class Paqueteria {
             throw new ClienteYaRegistrado();
         }
         
-        // Registrar cliente
+        //Registrar cliente
         clientes.put(cliente.getDni(), cliente);
+        
+        
     }
     
     /**
@@ -78,6 +86,7 @@ public class Paqueteria {
     /** Busca en el envio con ese localizador asociado y devuelve la localizacion donde se encuentra el paquete
      * @param localizador identificador asociado al envio
      * @return  devuelve la localizacion en la que se encuentra el envio*/
+    @Transactional
     public String localizarPaquete(String localizador){
         String localizacion = "";
         /** Busca en todos los centros logisticos */
@@ -99,6 +108,7 @@ public class Paqueteria {
     /** Busco el envio asociado a ese localizador y devuelve el estado actual del envio
      * @param localizador identificador asociado al envio
      * @return  devuelve el estado del envio (En gestion, Enviado, En reparto)*/
+    @Transactional
     public String estadoEnvio(String localizador){
         String estado = "";
         /** Busca en todos los centros logisticos */

@@ -9,21 +9,34 @@ import com.proyectodae.servicio.Paqueteria;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author raulb
  */
+@Entity
 public class Oficina extends PuntoControl{
     
     /** Id del centro logistico al que pertenece la oficina */
+    @Id
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="centroLogistico_id")
+    @Size(min=1, max=2)
     @NotBlank
     private String id;
     /** Provincia donde se encuentra la oficina*/
     @NotBlank
     private String provincia;
     /** Lista de envios que tiene que hacer la oficina */
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="oficina")
     @NotBlank
     private List<Envio> envios;
     /** Centro logistico asociado a la oficina */
