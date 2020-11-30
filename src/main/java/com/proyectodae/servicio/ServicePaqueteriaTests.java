@@ -5,7 +5,7 @@
  */
 package com.proyectodae.servicio;
 
-import org.springframework.boot.test.context.SpringBootTest;
+
 import com.proyectodae.entidades.Cliente;
 import com.proyectodae.entidades.Paquete;
 import com.proyectodae.entidades.Envio;
@@ -21,11 +21,13 @@ import javax.validation.ConstraintViolationException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author jmait
  */
+
 @SpringBootTest(classes = com.proyectodae.app.PaqueteriaApp.class)
 public class ServicePaqueteriaTests {
     @Autowired
