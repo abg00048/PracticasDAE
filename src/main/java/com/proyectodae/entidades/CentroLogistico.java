@@ -6,25 +6,15 @@
 package com.proyectodae.entidades;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author raulb
  */
-@Entity
 public class CentroLogistico extends PuntoControl{
     
     /** Identificador del centro logistico */
-    @Id
-    @Size(min=1, max=2)
     @NotBlank
     private String id;
     /** Nombre del centro logistico */
@@ -34,11 +24,9 @@ public class CentroLogistico extends PuntoControl{
     @NotBlank
     private String localizacion;
     /** Lista de las provincias con oficinas asociadas a este centro logistico */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="centroLogistico")
     @NotBlank
     private List<Oficina> provincias;
     /** Lista de centros logisticos asociados a este centro logistico */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="centroLogistico")
     @NotBlank
     private List<CentroLogistico> conexiones;
     

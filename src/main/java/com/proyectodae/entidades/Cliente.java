@@ -6,24 +6,17 @@
 package com.proyectodae.entidades;
 
 import com.proyectodae.util.Codificador;
-import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author alvar
  */
-@Entity
-public class Cliente implements Serializable {
+public class Cliente {
     /** DNI del cliente*/
-    @Id
-    @Size(min=9, max=9)
     @Pattern(regexp="\\d{8}[A-\"\\\\HJ-NP-TV-Z]")
     String dni;
     /** Nombre completo */
@@ -33,7 +26,6 @@ public class Cliente implements Serializable {
     @NotBlank
     String direccion;
     /** Teléfono */
-    @Size(min=9, max=13) 
     @Pattern(regexp="^(\\+34|0034|34)?[6789]\\d{8}$")
     String tlf;
     

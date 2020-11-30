@@ -8,24 +8,17 @@ package com.proyectodae.entidades;
 
 import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 /**
  *
  * @author jmait
  */
-@Entity
 public class Envio {
     /** Localizador */
-    @Id
-    @Size(min=9, max=9)
     @NotBlank
     String localizador;
     /** Importe */
@@ -38,12 +31,9 @@ public class Envio {
     @NotBlank
     LocalDate fechaentrega;
      /** Cliente remitente*/
-    @OneToOne
-    @NotBlank
+    @NotNull
     private Cliente remitente;
     /** Cliente destinatario */
-    @OneToOne
-    @NotBlank
     private Cliente destinatario;
     /** Direccion de origen del envio */
     @NotBlank
@@ -52,11 +42,8 @@ public class Envio {
     @NotBlank
     String destino;
     /** Paquete asociado al envio */
-    @OneToOne
-    @NotBlank
     Paquete paquete;
     /** Situacion del paquete */
-    @NotBlank
     String situacion;
     /** Ruta que tiene que seguir el envio */
     List<String> ruta;
