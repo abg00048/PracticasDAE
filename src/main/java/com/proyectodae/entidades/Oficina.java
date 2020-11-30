@@ -114,17 +114,31 @@ public class Oficina extends PuntoControl{
         else{
             /** Id del centro logistico de la provincia desde la que se envia el paquete */
             String idCentroOrigen = "";
+            /** Guarda la posicion dentro de la lista del centro logistico de origen */
+            int centroOrigen = 0;
             /** Id del centro logistico asociado a la provincia de destino del paquete */
             String idCentroDestino = "";
+            /** Guarda la posicion dentro de la lista del centro logistico de destino */
+            int centroDestino = 0;
             for (int i = 0; i < servicio.getCentrosLogisticos().size(); i++){
-                /** Compara si la provincia del centro logistico y la provincia de la que sale el paquete son la misma */
+                /** Compara si el envio se hace desde un centro logistico */
                 if (servicio.getCentrosLogisticos().get(i).getLocalizacion() == envio.origen){
                     idCentroOrigen = servicio.getCentrosLogisticos().get(i).getId();
+                    centroOrigen = i;
+                    ruta.add(envio.origen);
                 }
                 for (int j = 0; j < servicio.getCentrosLogisticos().get(i).getProvincias().size(); j++){
+                    /** Compara si alguna provincia del centro logistico "i" es igual a la provincia origen del paquete */
+                    if (servicio.getCentrosLogisticos().get(i).getProvincias().get(j).getProvincia() == envio.origen){
+                        idCentroOrigen = servicio.getCentrosLogisticos().get(i).getId();
+                        centroOrigen = i;
+                        ruta.add(servicio.getCentrosLogisticos().get(i).getLocalizacion());
+                        ruta.add(envio.origen);
+                    }
                     /** Compara si alguna provincia del centro logistico "i" es igual a la provincia destino del paquete */
                     if (servicio.getCentrosLogisticos().get(i).getProvincias().get(j).getProvincia() == envio.destino){
                         idCentroDestino = servicio.getCentrosLogisticos().get(i).getId();
+                        centroDestino = i;
                     }
                 }
             }
@@ -133,8 +147,49 @@ public class Oficina extends PuntoControl{
                 ruta.add(envio.origen);
                 ruta.add(envio.destino);
             }
+            /** El envio se hace entre dos provincias asociadas a dos centros logisticos diferentes */
             else{
-                // Por hacer
+                Boolean encontrado = false;
+                for (int i = 0; i < servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().size(); i++){
+                    if (servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getId() == idCentroDestino){
+                        ruta.add(servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getLocalizacion());
+                        encontrado = true;
+                        if (servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getLocalizacion() != envio.destino){
+                            for (int j = 0; j < servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getProvincias().size(); j++){
+                                if (servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getProvincias().get(j).getProvincia() == envio.destino){
+                                    ruta.add(envio.destino);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (encontrado = false){
+                    while(encontrado == false){
+                        idCentroOrigen = servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(0).getId();
+                        for (int i = 0; i < servicio.getCentrosLogisticos().size(); i++){
+                            if (servicio.getCentrosLogisticos().get(i).getId() == idCentroOrigen){
+                                centroOrigen = i;
+                            }
+                        }
+                        for (int i = 0; i < servicio.getCentrosLogisticos().get(centroOrigen).getProvincias().size(); i++){
+                            if (servicio.getCentrosLogisticos().get(centroOrigen).getProvincias().get(i).getProvincia() == envio.destino){
+                                ruta.add(envio.destino);
+                                encontrado = true;
+                            }
+                        }
+                        if (encontrado == false){
+                            for (int i = 0; i < servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().size(); i++){
+                                if (servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getId() == idCentroDestino){
+                                    ruta.add(servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getLocalizacion());
+                                    encontrado = true;
+                                    if (servicio.getCentrosLogisticos().get(centroOrigen).getConexiones().get(i).getLocalizacion() != envio.destino){
+                                        ruta.add(envio.destino);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         return ruta;
