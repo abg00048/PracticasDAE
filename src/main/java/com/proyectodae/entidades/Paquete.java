@@ -5,15 +5,21 @@
  */
 package com.proyectodae.entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author jmait
  */
+@Entity
 public class Paquete {
     /** Id */
+    @Id
+    @Size(min=9, max=9)
     @NotBlank
     String id;
     /** Dimensiones */
