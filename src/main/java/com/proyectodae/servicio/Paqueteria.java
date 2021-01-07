@@ -58,6 +58,16 @@ public class Paqueteria {
         this.clientes = clientes;
     }
     
+    @Transactional
+    public Cliente verCliente(@NotBlank String dni) {
+        Optional<Cliente> clienteLogin = repositorioClientes.buscar(dni);
+ 
+        // Asegurarnos de que se devuelve el cliente con los datos precargados
+        clienteLogin.ifPresent(c -> c.getDni());
+        return clienteLogin.get();
+    }    
+
+    
     /**
      * Dar de alta cliente y crear una cuenta asociada
      * @param cliente el cliente a dar de alta

@@ -41,7 +41,7 @@ public class Cliente implements Serializable {
     @Email
     String email;
     /** Clave de acceso al sistema */
-    String clave;
+    private String clave;
 
     public Cliente(String dni, String nombre, String direccion, String tlf, String email, String clave) {
         this.dni = dni;
@@ -79,7 +79,21 @@ public class Cliente implements Serializable {
      * @return 
      */
     public boolean claveValida(String clave) {
-        return this.clave.equals(Codificador.codificar(clave));        
+        return this.getClave().equals(Codificador.codificar(clave));        
+    }
+
+    /**
+     * @return the clave
+     */
+    public String getClave() {
+        return clave;
+    }
+
+    /**
+     * @param clave the clave to set
+     */
+    public void setClave(String clave) {
+        this.clave = clave;
     }
     
 }
