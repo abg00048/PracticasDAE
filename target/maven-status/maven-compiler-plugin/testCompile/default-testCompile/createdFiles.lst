@@ -1,4 +1,3 @@
-com\proyectodae\entidades\ClienteTest.class
 com\proyectodae\servicios\ServicioLimpiadoBaseDatos.class
 com\proyectodae\controladoresREST\ControladorRESTTest.class
 com\proyectodae\servicios\ServicePaqueteriaTests.class

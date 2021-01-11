@@ -7,10 +7,6 @@ package com.proyectodae.entidades;
 
 import com.proyectodae.util.Codificador;
 import java.io.Serializable;
-<<<<<<< Updated upstream
-import java.time.LocalDate;
-=======
->>>>>>> Stashed changes
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
@@ -37,10 +33,7 @@ public class Cliente implements Serializable {
     @NotBlank
     String direccion;
     /** Teléfono */
-<<<<<<< Updated upstream
-=======
     @NotNull
->>>>>>> Stashed changes
     @Size(min=9, max=13) 
     @Pattern(regexp="^(\\+34|0034|34)?[6789]\\d{8}$")
     String tlf;
@@ -50,12 +43,8 @@ public class Cliente implements Serializable {
     @Email
     String email;
     /** Clave de acceso al sistema */
-<<<<<<< Updated upstream
-    private String clave;
-=======
     @NotNull
     String clave;
->>>>>>> Stashed changes
 
     public Cliente() {
     }
@@ -96,21 +85,7 @@ public class Cliente implements Serializable {
      * @return 
      */
     public boolean claveValida(String clave) {
-        return this.getClave().equals(Codificador.codificar(clave));        
-    }
-
-    /**
-     * @return the clave
-     */
-    public String getClave() {
-        return clave;
-    }
-
-    /**
-     * @param clave the clave to set
-     */
-    public void setClave(String clave) {
-        this.clave = clave;
+        return this.clave.equals(Codificador.codificar(clave));        
     }
     
     public String getClave() {

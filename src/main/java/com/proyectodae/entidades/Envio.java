@@ -13,10 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
-<<<<<<< Updated upstream
-import javax.validation.constraints.NotNull;
-=======
->>>>>>> Stashed changes
 import javax.validation.constraints.Size;
 
 
