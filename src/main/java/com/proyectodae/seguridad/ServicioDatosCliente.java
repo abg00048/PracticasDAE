@@ -7,10 +7,7 @@ package com.proyectodae.seguridad;
 
 import com.proyectodae.entidades.Cliente;
 import com.proyectodae.servicio.Paqueteria;
-<<<<<<< Updated upstream
-=======
 import org.springframework.stereotype.Service;
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,17 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-<<<<<<< Updated upstream
-
-/**
- *
- * @author jmait
- */
-@Service
-public class ServicioDatosCliente {
-    @Autowired
-    Paqueteria paqueteria;
-=======
 /**
  *
  * @author alvar
@@ -39,7 +25,6 @@ public class ServicioDatosCliente {
 public class ServicioDatosCliente implements UserDetailsService{
     @Autowired
     Paqueteria servicioPaqueteria;
->>>>>>> Stashed changes
     
     PasswordEncoder encoder;
     
@@ -53,11 +38,7 @@ public class ServicioDatosCliente implements UserDetailsService{
     
     @Override
     public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
-<<<<<<< Updated upstream
-        Cliente cliente = paqueteria.verCliente(dni);
-=======
         Cliente cliente = servicioPaqueteria.verCliente(dni)
->>>>>>> Stashed changes
                 .orElseThrow(() -> new UsernameNotFoundException(""));
         
         return User.withUsername(cliente.getDni())
