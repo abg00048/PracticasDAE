@@ -32,9 +32,6 @@ public class Paqueteria {
     /** Lista de los puntos de control */
     List<CentroLogistico> centrosLogisticos;
     
-    @Autowired
-    RepositorioClientes repositorioClientes;
-    
     public Paqueteria() {
         centrosLogisticos = new ArrayList();
     }
@@ -47,16 +44,6 @@ public class Paqueteria {
         this.centrosLogisticos = centrosLogisticos;
     }
     
-    @Transactional
-    public Cliente verCliente(@NotBlank String dni) {
-        Optional<Cliente> clienteLogin = repositorioClientes.buscar(dni);
- 
-        // Asegurarnos de que se devuelve el cliente con los datos precargados
-        clienteLogin.ifPresent(c -> c.getDni());
-        return clienteLogin.get();
-    }    
-
-    
     /**
      * Dar de alta cliente y crear una cuenta asociada
      * @param cliente el cliente a dar de alta
@@ -66,16 +53,9 @@ public class Paqueteria {
             throw new ClienteYaRegistrado();            
         }
         
-<<<<<<< Updated upstream
-        //Registrar cliente
-        clientes.put(cliente.getDni(), cliente);
-        
-        
-=======
         repositorioClientes.guardar(cliente);
         
         return cliente;
->>>>>>> Stashed changes
     }
     
     /**
