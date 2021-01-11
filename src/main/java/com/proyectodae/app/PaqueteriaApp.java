@@ -7,7 +7,7 @@ package com.proyectodae.app;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.proyectodae.entidades.CentroLogistico;
+import com.proyectodae.entidades.puntosControl.CentroLogistico;
 import com.proyectodae.servicio.Paqueteria;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -16,18 +16,24 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 
 /**
  *
  * @author alvar
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={
+    "com.proyectodae.servicio",
+    "com.proyectodae.repositorios",
+    "com.proyectodae.controladoresREST",
+    "com.proyectodae.seguridad"
+})
+@EntityScan(basePackages="com.proyectodae.entidades")
 public class PaqueteriaApp {
-    public static void main(String[] args) throws Exception, java.io.IOException {
+    public static void main(String[] args) throws Exception{
         // Creación de servidor
-        SpringApplication servidor = new SpringApplication(PaqueteriaApp.class);
-        ApplicationContext context = servidor.run(args);
+        SpringApplication.run(PaqueteriaApp.class, args);
         
         //Lectura del fichero redujapack.json
         try {

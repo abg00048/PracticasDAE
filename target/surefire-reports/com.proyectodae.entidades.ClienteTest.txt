@@ -1,0 +1,25 @@
+-------------------------------------------------------------------------------
+Test set: com.proyectodae.entidades.ClienteTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 1.094 s <<< FAILURE! - in com.proyectodae.entidades.ClienteTest
+testValidacionCliente  Time elapsed: 0.849 s  <<< ERROR!
+javax.validation.ValidationException: HV000032: Unable to initialize org.hibernate.validator.internal.constraintvalidators.bv.PatternValidator.
+	at com.proyectodae.entidades.ClienteTest.testValidacionCliente(ClienteTest.java:38)
+Caused by: java.lang.IllegalArgumentException: HV000022: Invalid regular expression.
+	at com.proyectodae.entidades.ClienteTest.testValidacionCliente(ClienteTest.java:38)
+Caused by: java.util.regex.PatternSyntaxException: 
+Illegal character range near index 8
+\d{8}[A-"\\HJ-NP-TV-Z]
+        ^
+	at com.proyectodae.entidades.ClienteTest.testValidacionCliente(ClienteTest.java:38)
+
+testComprobacionClave  Time elapsed: 0.238 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+Expecting:
+ <false>
+to be equal to:
+ <true>
+but was not.
+	at com.proyectodae.entidades.ClienteTest.testComprobacionClave(ClienteTest.java:55)
+
