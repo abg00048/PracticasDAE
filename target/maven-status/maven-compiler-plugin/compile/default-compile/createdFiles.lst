@@ -1,3 +1,5 @@
+<<<<<<< Updated upstream
+=======
 com\proyectodae\entidades\Cliente.class
 com\proyectodae\app\PaqueteriaApp.class
 com\proyectodae\repositorios\RepositorioClientes.class
@@ -18,3 +20,4 @@ com\proyectodae\entidades\Envio.class
 com\proyectodae\entidades\puntosControl\Oficina.class
 com\proyectodae\util\JsonRead.class
 com\proyectodae\entidades\puntosControl\PuntoControl.class
+>>>>>>> Stashed changes

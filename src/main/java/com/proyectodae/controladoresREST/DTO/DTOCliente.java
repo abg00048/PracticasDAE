@@ -30,7 +30,7 @@ public class DTOCliente {
     /** Clave de acceso al sistema */
     String clave;    
 
-    public DTOCliente(String dni, String nombre, String direccion, String tlf, String email, String clave) {
+    public DTOCliente(String dni, String nombre, LocalDate fNacimiento, String direccion, String tlf, String email, String clave) {
         this.dni = dni;
         this.nombre = nombre;
         this.direccion = direccion;
