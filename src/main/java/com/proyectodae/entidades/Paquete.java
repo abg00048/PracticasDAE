@@ -24,9 +24,11 @@ public class Paquete {
     String id;
     /** Dimensiones */
     @NotBlank
+    @Positive
     String dimensiones;
     /** Peso */
     @NotBlank
+    @Positive
     String peso;
     
 

@@ -5,15 +5,13 @@
  */
 package com.proyectodae.servicio;
 
-import com.proyectodae.entidades.CentroLogistico;
+import com.proyectodae.entidades.puntosControl.CentroLogistico;
 import com.proyectodae.entidades.Cliente;
 import com.proyectodae.excepciones.ClienteYaRegistrado;
 import com.proyectodae.repositorios.RepositorioClientes;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.TreeMap;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,8 +27,8 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 public class Paqueteria {
-    /** Mapa con la lista de clientes ordenada por DNI */
-    Map<String, Cliente> clientes;
+    @Autowired
+    RepositorioClientes repositorioClientes;
     /** Lista de los puntos de control */
     List<CentroLogistico> centrosLogisticos;
     
@@ -38,7 +36,6 @@ public class Paqueteria {
     RepositorioClientes repositorioClientes;
     
     public Paqueteria() {
-        clientes = new TreeMap<>();
         centrosLogisticos = new ArrayList();
     }
 
@@ -48,14 +45,6 @@ public class Paqueteria {
     
     public void setCentroLogistico(List<CentroLogistico> centrosLogisticos) {
         this.centrosLogisticos = centrosLogisticos;
-    }
-
-    public Map<String, Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(Map<String, Cliente> clientes) {
-        this.clientes = clientes;
     }
     
     @Transactional
@@ -72,15 +61,21 @@ public class Paqueteria {
      * Dar de alta cliente y crear una cuenta asociada
      * @param cliente el cliente a dar de alta
      */
-    public void altaCliente(@NotNull @Valid Cliente cliente) {
-        if (clientes.containsKey(cliente.getDni())) {
-            throw new ClienteYaRegistrado();
+    public Cliente altaCliente(@NotNull @Valid Cliente cliente) {
+        if (repositorioClientes.buscar(cliente.getDni()).isPresent()) {
+            throw new ClienteYaRegistrado();            
         }
         
+<<<<<<< Updated upstream
         //Registrar cliente
         clientes.put(cliente.getDni(), cliente);
         
         
+=======
+        repositorioClientes.guardar(cliente);
+        
+        return cliente;
+>>>>>>> Stashed changes
     }
     
     /**
@@ -89,10 +84,27 @@ public class Paqueteria {
      * @param clave la clave de acceso
      * @return el objeto de la clase Cliente asociado
      */
+    @Transactional
     public Optional<Cliente> loginCliente(@NotBlank String dni, @NotBlank String clave) {
-        return Optional.ofNullable(clientes.get(dni)).filter((cliente)->cliente.claveValida(clave));
+        Optional<Cliente> clienteLogin = repositorioClientes.buscar(dni)
+                .filter((cliente)->cliente.claveValida(clave));
+
+        return clienteLogin;
     }
 
+    /**
+     * Realiza un login de un cliente
+     * @param dni el DNI del cliente
+     * @param clave la clave de acceso
+     * @return el objeto de la clase Cliente asociado
+     */
+    @Transactional
+    public Optional<Cliente> verCliente(@NotBlank String dni) {
+        Optional<Cliente> clienteLogin = repositorioClientes.buscar(dni);
+
+        return clienteLogin;
+    } 
+    
     /** Busca en el envio con ese localizador asociado y devuelve la localizacion donde se encuentra el paquete
      * @param localizador identificador asociado al envio
      * @return  devuelve la localizacion en la que se encuentra el envio*/
