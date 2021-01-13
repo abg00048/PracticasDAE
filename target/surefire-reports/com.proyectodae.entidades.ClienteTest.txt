@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.proyectodae.entidades.ClienteTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.505 s <<< FAILURE! - in com.proyectodae.entidades.ClienteTest
-testValidacionCliente  Time elapsed: 0.233 s  <<< ERROR!
+Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.44 s <<< FAILURE! - in com.proyectodae.entidades.ClienteTest
+testValidacionCliente  Time elapsed: 0.196 s  <<< ERROR!
 javax.validation.ValidationException: HV000032: Unable to initialize org.hibernate.validator.internal.constraintvalidators.bv.PatternValidator.
 	at com.proyectodae.entidades.ClienteTest.testValidacionCliente(ClienteTest.java:38)
 Caused by: java.lang.IllegalArgumentException: HV000022: Invalid regular expression.
@@ -13,7 +13,7 @@ Illegal character range near index 8
         ^
 	at com.proyectodae.entidades.ClienteTest.testValidacionCliente(ClienteTest.java:38)
 
-testComprobacionClave  Time elapsed: 0.271 s  <<< FAILURE!
+testComprobacionClave  Time elapsed: 0.243 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: 
 
 Expecting:
